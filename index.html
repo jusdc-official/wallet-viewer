@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JUSDC Token Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background: #f4f6f8;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .token-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: 0.5rem auto;
+    }
+    .token-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+    }
+    .token-info {
+      flex: 1;
+      text-align: left;
+      margin-left: 1rem;
+    }
+    .price {
+      font-size: 0.85rem;
+      color: #444;
+    }
+    .btn {
+      background: #3056d3;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #223aa6;
+    }
+    .error {
+      color: #e53935;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>JUSDC Token Viewer</h1>
+  <div id="buttons"></div>
+  <div id="error" class="error"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      async function fetchTokenList() {
+        try {
+          const res = await fetch("https://gateway.pinata.cloud/ipfs/QmdHkjxe1qsYMjSLRUY6FA2C2BFjaeuAqKHb13QVHWGA3A");
+          const list = await res.json();
+          return list.tokens;
+        } catch (e) {
+          document.getElementById("error").innerText = "Failed to load token list.";
+          return [];
+        }
+      }
+
+      async function fetchPrice() {
+        try {
+          const res = await fetch("https://api.dexscreener.com/latest/dex/pairs/ethereum/0x1b77f673dd1b7634b33cddbc299f628855c4a934");
+          const data = await res.json();
+          return parseFloat(data.pair.priceUsd).toFixed(4);
+        } catch {
+          return null;
+        }
+      }
+
+      async function createButton(token) {
+        const price = token.chainId === 1 ? await fetchPrice() : null;
+
+        const box = document.createElement("div");
+        box.className = "token-box";
+
+        const logo = document.createElement("img");
+        logo.className = "token-logo";
+        logo.src = token.logoURI;
+        logo.alt = `${token.symbol} logo`;
+
+        const info = document.createElement("div");
+        info.className = "token-info";
+        info.innerHTML = `
+          <div><strong>${token.symbol}</strong> (${token.chainId === 1 ? "Ethereum" : "Polygon"})</div>
+          <div class="price">${price ? `$${price} USD` : "Price not available"}</div>
+        `;
+
+        const button = document.createElement("button");
+        button.className = "btn";
+        button.innerText = "Add to Wallet";
+        button.onclick = () => handleImport(token);
+
+        box.appendChild(logo);
+        box.appendChild(info);
+        box.appendChild(button);
+        return box;
+      }
+
+      async function handleImport(token) {
+        if (!window.ethereum) {
+          alert("Wallet not detected.");
+          return;
+        }
+
+        const current = await ethereum.request({ method: "eth_chainId" });
+        const expected = "0x" + token.chainId.toString(16);
+
+        if (current !== expected) {
+          try {
+            await ethereum.request({
+              method: "wallet_switchEthereumChain",
+              params: [{ chainId: expected }]
+            });
+          } catch {
+            alert(`Switch to ${token.chainId === 1 ? "Ethereum" : "Polygon"} to add ${token.symbol}`);
+            return;
+          }
+        }
+
+        try {
+          const wasAdded = await ethereum.request({
+            method: "wallet_watchAsset",
+            params: {
+              type: "ERC20",
+              options: {
+                address: token.address,
+                symbol: token.symbol,
+                decimals: token.decimals,
+                image: token.logoURI
+              }
+            }
+          });
+
+          alert(wasAdded
+            ? `${token.symbol} added to your wallet!`
+            : `You declined to add ${token.symbol}.`);
+        } catch (err) {
+          console.error(err);
+          alert("Error importing token.");
+        }
+      }
+
+      fetchTokenList().then(async (tokens) => {
+        const container = document.getElementById("buttons");
+        if (!container) return;
+
+        for (let token of tokens) {
+          const box = await createButton(token);
+          container.appendChild(box);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
