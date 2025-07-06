@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JUSDC Listing Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="https://gateway.pinata.cloud/ipfs/QmaEE6jZ8E8cCQ73yA7cdSyCzAjMHEdy5RgXpgmKQn2kMp" type="image/png" />
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f9fafa;
+      padding: 1.5rem;
+      color: #111;
+      max-width: 640px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .logo {
+      width: 72px;
+      border-radius: 50%;
+    }
+    .info {
+      margin-bottom: 1rem;
+    }
+    .price {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-top: 0.25rem;
+      color: #0057d8;
+    }
+    .meta, .desc, .social {
+      margin-bottom: 1rem;
+    }
+    .token-btn {
+      background: #0057d8;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .token-btn:hover {
+      background: #0040a4;
+    }
+    .links a {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: #0057d8;
+      text-decoration: none;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://gateway.pinata.cloud/ipfs/QmaEE6jZ8E8cCQ73yA7cdSyCzAjMHEdy5RgXpgmKQn2kMp" alt="JUSDC Logo" class="logo" />
+  <h1>JUSDC (Ethereum)</h1>
+  <div class="price">Price: <span id="price">Loading...</span> USD</div>
+
+  <div class="meta">
+    <strong>Contract:</strong> 0x3a4184028de3f2B2fB63d596ec9101328aC7A736<br />
+    <strong>Decimals:</strong> 18<br />
+    <strong>Total Supply:</strong> 37,975,000,000<br />
+    <strong>Network:</strong> Ethereum
+  </div>
+
+  <div class="desc">
+    <strong>Description:</strong><br />
+    JUSDC is a fully asset-backed, USD-pegged stablecoin minted only from verified real-world cash files stored on IPFS. It ensures transparency, regulatory compliance, and immutability by combining blockchain and off-chain financial proof.
+  </div>
+
+  <button class="token-btn" onclick="addToken()">📥 Add to Wallet</button>
+
+  <div class="social">
+    <strong>Links:</strong>
+    <div class="links">
+      <a href="https://jusdc.io" target="_blank">🌐 Website</a>
+      <a href="https://t.me/JUSDCOfficial" target="_blank">📢 Telegram</a>
+      <a href="https://x.com/JUSDC_Official" target="_blank">🐦 X</a>
+      <a href="https://github.com/JUSDC-Official" target="_blank">💻 GitHub</a>
+      <a href="https://facebook.com/JUSDCOfficial2025" target="_blank">📘 Facebook</a>
+      <a href="https://instagram.com/JUSDCOfficial" target="_blank">📸 Instagram</a>
+    </div>
+  </div>
+
+  <script>
+    async function fetchPrice() {
+      try {
+        const res = await fetch("https://api.dexscreener.com/latest/dex/pairs/ethereum/0x1b77f673dd1b7634b33cddbc299f628855c4a934");
+        const data = await res.json();
+        const price = data?.pair?.priceUsd || data?.pairs?.[0]?.priceUsd;
+        document.getElementById("price").textContent = price ? parseFloat(price).toFixed(4) : "Unavailable";
+      } catch {
+        document.getElementById("price").textContent = "Error";
+      }
+    }
+
+    fetchPrice();
+    setInterval(fetchPrice, 30000);
+
+    async function addToken() {
+      try {
+        await window.ethereum.request({
+          method: "wallet_watchAsset",
+          params: {
+            type: "ERC20",
+            options: {
+              address: "0x3a4184028de3f2B2fB63d596ec9101328aC7A736",
+              symbol: "JUSDC",
+              decimals: 18,
+              image: "https://gateway.pinata.cloud/ipfs/QmaEE6jZ8E8cCQ73yA7cdSyCzAjMHEdy5RgXpgmKQn2kMp"
+            }
+          }
+        });
+      } catch (e) {
+        alert("Wallet import failed.");
+      }
+    }
+  </script>
+</body>
+</html>
