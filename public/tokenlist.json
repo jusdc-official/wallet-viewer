@@ -1,0 +1,101 @@
+{
+  "name": "JUSDC Official Tokens",
+  "logoURI": "https://gateway.pinata.cloud/ipfs/QmaEE6jZ8E8cCQ73yA7cdSyCzAjMHEdy5RgXpgmKQn2kMp",
+  "keywords": ["JUSDC", "DeFi", "Stablecoins"],
+  "timestamp": "2025-07-07T20:16:00+04:00",
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "tokens": [
+    {
+      "chainId": 1,
+      "address": "0x047330be3669bB9C4bA12eaF1e0ed923026ff60c",
+      "symbol": "JUSDT",
+      "name": "JUSDT",
+      "decimals": 18,
+      "logoURI": "https://gateway.pinata.cloud/ipfs/QmXo5RPRjwb6emszehRREa8Ygq3A8aVqqKzmPxo15ZyRuK"
+    },
+    {
+      "chainId": 1,
+      "address": "0x3a4184028de3f2B2fB63d596ec9101328aC7A736",
+      "symbol": "JUSDC18",
+      "name": "JUSDC (18 decimals)",
+      "decimals": 18,
+      "logoURI": "https://gateway.pinata.cloud/ipfs/QmaEE6jZ8E8cCQ73yA7cdSyCzAjMHEdy5RgXpgmKQn2kMp"
+    },
+    {
+      "chainId": 1,
+      "address": "0x3ef4C53F23da91920651931a4BF98812444F4171",
+      "symbol": "JUSDC6",
+      "name": "JUSDC (6 decimals)",
+      "decimals": 6,
+      "logoURI": "https://gateway.pinata.cloud/ipfs/QmaEE6jZ8E8cCQ73yA7cdSyCzAjMHEdy5RgXpgmKQn2kMp"
+    },
+    {
+      "chainId": 137,
+      "address": "0xFfF13F7Df6db0811A45b162D5CA742f970888eE0",
+      "symbol": "JUSDC",
+      "name": "JUSDC",
+      "decimals": 18,
+      "logoURI": "https://gateway.pinata.cloud/ipfs/QmaEE6jZ8E8cCQ73yA7cdSyCzAjMHEdy5RgXpgmKQn2kMp"
+    },
+    {
+      "chainId": 137,
+      "address": "0xE87FCC08A041B96CA05989026d808E153121403A",
+      "symbol": "JUSDT",
+      "name": "JUSDT",
+      "decimals": 18,
+      "logoURI": "https://gateway.pinata.cloud/ipfs/QmXo5RPRjwb6emszehRREa8Ygq3A8aVqqKzmPxo15ZyRuK"
+    },
+    {
+      "chainId": 137,
+      "address": "0x5a5E9C6363a8B74C8216F542FB1FDFd0163A8825",
+      "symbol": "wUSDC",
+      "name": "Wrapped USDC",
+      "decimals": 6,
+      "logoURI": "https://gateway.pinata.cloud/ipfs/Qma6PRN6i4rPAPyZ8y8vcPUKcDruWgJvRHEJvcTbsog8t2"
+    },
+    {
+      "chainId": 137,
+      "address": "0x258117011B6D405141113AD2973B43cef473AA4F",
+      "symbol": "wUSDT",
+      "name": "Wrapped USDT",
+      "decimals": 6,
+      "logoURI": "https://gateway.pinata.cloud/ipfs/QmPdhc8QsRmw47bq7m3BrKD2C7wHQdVaCLcvFQJ2GZHJm4"
+    },
+    {
+      "chainId": 8453,
+      "address": "0xfF9dEfDB71e9aeBA1FAAB543c5e2989f5eFc152A",
+      "symbol": "JUSDC",
+      "name": "JUSDC",
+      "decimals": 18,
+      "logoURI": "https://gateway.pinata.cloud/ipfs/QmaEE6jZ8E8cCQ73yA7cdSyCzAjMHEdy5RgXpgmKQn2kMp"
+    },
+    {
+      "chainId": 8453,
+      "address": "0x81442468Dcc51b12A1153F73cf543F24119b958c",
+      "symbol": "JUSDT",
+      "name": "JUSDT",
+      "decimals": 18,
+      "logoURI": "https://gateway.pinata.cloud/ipfs/QmXo5RPRjwb6emszehRREa8Ygq3A8aVqqKzmPxo15ZyRuK"
+    },
+    {
+      "chainId": 8453,
+      "address": "0x0F32251ffc5437bB83421812ebfd62B960b535Ac",
+      "symbol": "wUSDC",
+      "name": "Wrapped USDC",
+      "decimals": 6,
+      "logoURI": "https://gateway.pinata.cloud/ipfs/Qma6PRN6i4rPAPyZ8y8vcPUKcDruWgJvRHEJvcTbsog8t2"
+    },
+    {
+      "chainId": 8453,
+      "address": "0x4Cd9aE9aADa0930C1F7AF156793Bc3FB54b8aC23",
+      "symbol": "wUSDT",
+      "name": "Wrapped USDT",
+      "decimals": 6,
+      "logoURI": "https://gateway.pinata.cloud/ipfs/QmPdhc8QsRmw47bq7m3BrKD2C7wHQdVaCLcvFQJ2GZHJm4"
+    }
+  ]
+}
