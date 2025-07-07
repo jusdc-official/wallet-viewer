@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/wallet-viewer/static/js/main.402ebd77.js",
+    "main.js": "/wallet-viewer/static/js/main.d56b9674.js",
     "index.html": "/wallet-viewer/index.html",
-    "main.402ebd77.js.map": "/wallet-viewer/static/js/main.402ebd77.js.map"
+    "main.d56b9674.js.map": "/wallet-viewer/static/js/main.d56b9674.js.map"
   },
   "entrypoints": [
-    "static/js/main.402ebd77.js"
+    "static/js/main.d56b9674.js"
   ]
 }
